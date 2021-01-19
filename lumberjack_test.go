@@ -493,9 +493,9 @@ func TestTimeFromName(t *testing.T) {
 		want     time.Time
 		wantErr  bool
 	}{
-		{"foo-2014-05-04T14-44-33.555.log", time.Date(2014, 5, 4, 14, 44, 33, 555000000, time.UTC), false},
-		{"foo-2014-05-04T14-44-33.555", time.Time{}, true},
-		{"2014-05-04T14-44-33.555.log", time.Time{}, true},
+		{"foo-20140504-144433.555.log", time.Date(2014, 5, 4, 14, 44, 33, 555000000, time.UTC), false},
+		{"foo-20140504-144433.555", time.Time{}, true},
+		{"20140504-144433.555.log", time.Time{}, true},
 		{"foo.log", time.Time{}, true},
 	}
 
