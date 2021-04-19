@@ -39,6 +39,7 @@ const (
 	backupTimeFormat = "20060102-150405.000"
 	compressSuffix   = ".gz"
 	defaultMaxSize   = 100
+	defaultFileMode  = 0644
 )
 
 // ensure we always implement io.WriteCloser
@@ -212,7 +213,7 @@ func (l *Logger) openNew() error {
 	}
 
 	name := l.filename()
-	mode := os.FileMode(0600)
+	mode := os.FileMode(defaultFileMode)
 	info, err := osStat(name)
 	if err == nil {
 		// Copy the mode off the old logfile.
@@ -277,7 +278,7 @@ func (l *Logger) openExistingOrNew(writeLen int) error {
 		return l.rotate()
 	}
 
-	file, err := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, 0644)
+	file, err := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, defaultFileMode)
 	if err != nil {
 		// if we fail to open the old log file for some reason, just ignore
 		// it and open a new log file.
